@@ -1,0 +1,432 @@
+/*
+ Theme Name:  of-addnew
+*/
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+
+/* wordpress ログイン時に出る上のメニュー */
+#wpadminbar {
+    position: absolute;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+}
+
+:root {
+    --gap: 32px;
+    --width-conteiner: 960px;
+
+    --marginTop-body: 0;
+    /*15px; */
+    --marginBottom-body: 15px;
+    --marginLeft-body: 0px;
+    --marginRight-body: 0px;
+
+    --marginTopBtm-content: 90px;
+
+    --wpadminbar-height: 0;
+
+    --main-color: black;
+    --main-backcolor: white;
+    --sub-color01: #EA5504;
+    --sub-color02: #00F;
+
+    --fontFamily-tittle: 'Noto Sans JP', sans-serif;
+    --fontFamily-text: "メイリオ", "Meiryo", Verdana, Helvetica, sans-serif;
+    --fontFamily-sub: 'Zen Antique', serif;
+    --container-paddingTop: 30px;
+}
+
+body {
+    width: 100%;
+    font-family: var(--fontFamily-text);
+    font-size: 62.5%;
+    color: var(--main-color);
+    background-color: none;
+    border-color: var(--main-color);
+}
+
+span.block {
+    display: block;
+}
+
+/**
+ * mediaQueryクラスによる表示制御
+ *
+ **/
+@media (min-width: 1025px) {}
+
+@media (max-width: 1024px) {
+    * {
+        --width-conteiner: 80%;
+        --gap: 16px;
+    }
+
+    .mediaQuery.min1025 {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    * {
+        --width-conteiner: 95%;
+        --gap: 8px;
+    }
+
+    .mediaQuery.min601 {
+        display: none;
+    }
+}
+
+/**
+ * 背景色がメインカラーのときに使う下線
+ *
+ **/
+.content-tittle {
+    display: inline-block;
+    font-size: x-large;
+    position: relative;
+    line-height: 1.3;
+    font-family: var(--fontFamily-tittle);
+    letter-spacing: 0.12em;
+    border-bottom: 7px solid;
+}
+
+.content-tittle:before {
+    position: absolute;
+    bottom: -7px;
+    width: 50px;
+    height: 7px;
+    display: block;
+    content: "";
+    background: var(--sub-color01);
+}
+.content-tittle+.sub
+{
+   font-size: small;
+}
+
+
+.content-subtittle {
+    font-family: var(--fontFamily-sub);
+    font-size: xx-large;
+    border-left: 7px solid var(--sub-color01);
+    text-align: left;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    padding-left: 0.5em;
+}
+
+.content-caption {
+    font-size: large;
+}
+
+.description
+ {
+    font-size: x-large;
+    padding-top: var(--marginTopBtm-content);
+    padding-bottom: calc(var(--marginTopBtm-content) / 2);
+}
+.description:nth-of-type(1)
+ {
+    padding-top: 0;
+}
+.description:nth-last-child()
+ {
+    padding-bottom: 0;
+}
+.description p>span {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .content-subtittle {
+        font-size: x-large;
+    }
+
+    .content-caption {
+        font-size: medium;
+    }
+
+    .content-caption:not(:nth-of-type(1)) {
+        display: none;
+    }
+    .description {
+        font-size: large;
+    }
+}
+
+@media (max-width: 600px) {
+    .content-tittle {
+        font-size: large;
+    }
+
+    .content-subtittle {
+        font-size: x-large;
+    }
+
+    .content-caption {
+        display: none;
+    }
+    .description {
+        font-size: medium;
+    }
+}
+
+/**
+ *  文字のサイズ・色
+ *  背景色
+ *  枠線の色
+ **/
+* {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: inherit;
+    border-color: inherit;
+}
+
+.textAlign-left {
+    text-align: left;
+}
+
+.textAlign-center {
+    text-align: center;
+}
+
+.textAlign-right {
+    text-align: right;
+}
+
+.fontWeight-bold {
+    font-weight: bold;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.tittle {
+    text-decoration: none;
+    font-family: var(--fontFamily-tittle);
+}
+
+p>span {
+    display: block;
+}
+
+
+ul {
+    padding: 0;
+    list-style: none;
+
+}
+
+img {
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+}
+
+
+
+/**
+ * コンテナ
+ *
+ **/
+.container:nth-child(1) {
+    padding-top: 0;
+}
+
+.container {
+    /*width:var(--width-conteiner);*/
+    max-width: 100%;
+    padding-top: calc(var(--marginTopBtm-content) / 2);
+    padding-bottom: calc(var(--marginTopBtm-content) / 2);
+    padding-left: calc((100% - var(--width-conteiner)) / 2);
+    padding-right: calc((100% - var(--width-conteiner)) / 2);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.container>.content:nth-of-type(1) {
+    padding-top: var(--marginTopBtm-content);
+}
+
+.container>*:nth-child(n + 2) {
+    width: 95%;
+    margin: auto;
+    padding-top: calc(var(--marginTopBtm-content) / 2);
+}
+
+.container>*:last-child {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+
+/**
+ * テキストに下線を引く
+ *
+ **/
+.text-underline01 {
+    display: inline-block;
+    position: relative;
+    border-bottom: 7px solid var(--main-color);
+    padding-bottom: 9px;
+}
+
+.text-underline01::before {
+    width: 60%;
+    max-width: 20px;
+    position: absolute;
+    bottom: -7px;
+    height: 7px;
+    display: block;
+    content: "";
+    background: var(--sub-color01);
+}
+
+/**
+ * ポジション関連
+ *
+ **/
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.position-absolute.centering {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+/* カラーセットスタイツ */
+.color-set02 {
+    background-color: var(--main-color);
+    color: var(--main-backcolor);
+    border-color: var(--main-backcolor);
+}
+
+/* こっちを優先 */
+.color-set01 {
+    background-color: var(--main-backcolor);
+    color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+/******************************************* 住所関連 */
+.post-no:before {
+    content: "〒";
+}
+
+.tell:before {
+    content: "TEL：";
+}
+
+.fax:before {
+    content: "FAX：";
+}
+
+
+/* スクロールによるスライドイン */
+.slidein {
+    opacity: 0;
+    transform: translate(0, 0);
+    transition: all 1.5s;
+    transform: translate(-30px, 0);
+}
+
+.slidein.js_active {
+    opacity: 1 !important;
+    transform: translate(0, 0) !important;
+}
+
+/**
+ * 必須入力表示
+ *
+ **/
+label.required:after {
+    color: red;
+    border: red 1px solid;
+    border-radius: 5px;
+    content: "必須";
+    padding: 1px 3px;
+    margin-left: 3px;
+}
+
+/**
+ * リンクボタン
+ *
+ **/
+.bottom {
+    width: 100%;
+    height: 2em;
+    display: block;
+    text-align: center;
+    font-size: x-large;
+    font-family: var(--fontFamily-tittle);
+}
+
+.bottom:hover {
+    background-color: gray;
+    color: #FFF;
+}
+
+@media (max-width: 1024px) {
+    .bottom {
+        font-size: large;
+    }
+}
+
+
+/*
+#main {
+    --fontSize-big: 1.2em;
+    --marginTopBtm-content: 90px;
+}
+
+#main p,
+#main a {
+    padding: 5px;
+    font-size: x-large;
+    letter-spacing: 0.1em;
+    line-height: calc(x-large + 0.6em);
+}
+
+@media (max-width: 1024px) {
+    #main {
+        --fontSize-big: 1.0em;
+        --marginTopBtm-content: 70px;
+    }
+}
+
+@media (max-width: 600px) {
+    #main {
+        --fontSize-big: 0.8em;
+        --marginTopBtm-content: 50px;
+    }
+}
+*/
+
+/**
+ * ハニートラップ用
+ * */
+.subject {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+

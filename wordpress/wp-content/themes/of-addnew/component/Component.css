@@ -1,0 +1,333 @@
+/**********
+画像とテキストの横並び
+**********/
+.container .pattern01 {
+    padding-top: calc(var(--marginTopBtm-content) / 2);
+}
+
+.container .pattern01>*:not(:nth-child(1)) {
+    margin-top: var(--marginTopBtm-content);
+}
+
+.container .pattern01 .cont-text .content-caption {
+    text-align: justify;
+    letter-spacing: 0.05rem;
+    line-height: 2em;
+}
+
+/* リンクボタン */
+/*
+.container .pattern01 .cont-btn {
+    width: 50%;
+}
+*/
+.container .pattern01 .cont-btn {
+    bottom: 0;
+}
+
+@media (min-width: 601px) {
+
+    .container .pattern01 .btn-link-parent {
+        position: relative;
+    }
+
+    .container .pattern01 .btn-link {
+        position: absolute;
+        bottom: 0px;
+        right: 0;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .container .pattern01 .content-subtittle span {
+        display: initial;
+    }
+
+    .container .pattern01>.side-by-side {
+        flex-direction: row-reverse;
+    }
+
+    .container .pattern01>.side-by-side>* {
+        width: 100%;
+    }
+
+    .container .pattern01 .content-subtittle {
+        margin-bottom: 15px;
+    }
+
+    .container .pattern01 .cont-btn {
+        bottom: -36px;
+    }
+
+}
+
+
+/**********
+画像ギャラリー
+**********/
+.container .pattern02 .content-subtittle {
+    width: fit-content;
+		font-size: x-large;
+}
+
+.container .pattern02 .content-subtittle>* {
+    white-space: nowrap
+}
+
+.container .pattern02 .content-caption {
+    display: block;
+	 position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+@media (min-width: 1025px) {
+    .container .pattern02 .description> :nth-child(1) {
+        display: inline;
+    }
+}
+{
+@media (max-width: 1024px)
+	.container .pattern02 .content-subtittle {
+		font-size: large;
+	}
+}
+
+@media (min-width: 601px) {
+    .container .pattern02 .description> :nth-child(1) {
+        margin-right: 1rem;
+    }
+
+    .container .pattern02 .description {
+        flex-flow: nowrap;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .container .pattern02 .content-subtittle>span {
+        display: inline;
+    }
+
+    .container .pattern02 .description>* {
+        width: 100%;
+    }
+
+    .container .pattern02 img+p {
+        display: none;
+    }
+
+}
+
+
+/**********
+タイトルとテーブル
+**********/
+.container .pattern03>.side-by-side>.clmItem:not(.table) {
+    white-space: nowrap;
+    margin-right: 0.5rem;
+}
+
+.container .pattern03>.side-by-side>.clmItem.table {
+    width: 100%;
+    display: block;
+}
+
+.container .pattern03>.side-by-side>.clmItem.table>table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.container .pattern03>.side-by-side>.clmItem.table>table tr {
+    border-bottom: 1px solid;
+}
+
+@media (min-width: 601px) {
+    .container .pattern03>.side-by-side {
+        flex-flow: nowrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .container .pattern03>.side-by-side {
+        justify-content: center;
+    }
+
+    .container .pattern03>.side-by-side>.clmItem:not(.table) {
+        width: 100%
+    }
+
+    .container .pattern03>.side-by-side>.clmItem.table {
+        width: 80%;
+        margin-top: 15px;
+    }
+}
+
+
+
+/* テーブルレイアウト */
+#main {
+    --width-patternTable-rowHead: 30%;
+    --fontSize-rowHead: inherit;
+    --fontSize-rowDate: 1.5em;
+}
+
+.container .pattern-table {
+    font-size: large;
+}
+
+.container .pattern-table>.side-by-side {
+    border: 1px solid var(--main-color);
+	padding: 1rem;
+}
+
+.container .pattern-table>.side-by-side>.clmItem:nth-child(1) {
+    width: var(--width-patternTable-rowHead);
+}
+
+.container .pattern-table>.side-by-side>.clmItem:nth-child(2) {
+    width: calc(100% - var(--width-patternTable-rowHead));
+}
+
+.container .pattern-table>.side-by-side>.clmItem:nth-child(1)>* {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.container .pattern-table .rowHead * {
+    width: 100%;
+}
+
+@media (mAX-width: 1024px) {
+    #main {
+        --width-patternTable-rowHead: 150px;
+        --fontSize-rowHead: 1.0em;
+        --fontSize-rowDate: 0.8em;
+    }
+}
+@media (mAX-width: 700px) {
+    #main {
+        --width-patternTable-rowHead: 100%;
+        --fontSize-rowHead: 1.0em;
+        --fontSize-rowDate: 0.8em;
+    }
+	
+	.container .pattern-table>.side-by-side * {
+		position: unset;
+	}
+	
+	.container .pattern-table>.side-by-side>.clmItem:nth-child(1) {
+		width: var(--width-patternTable-rowHead);
+	}
+
+	.container .pattern-table>.side-by-side>.clmItem:nth-child(2) {
+		width: 100%;
+	}
+	
+	.container .pattern-table>.side-by-side>.clmItem:nth-child(1)>* {
+		top: none;
+		left: none;
+		transform: none;
+		-webkit-transform: none;
+		-ms-transform: none;
+	}
+
+}
+
+
+/**
+画像の上説明文
+*/
+#main {
+    --captiononimg-height: 470px;
+    --captiononimg-width: 470px;
+}
+
+.container .captiononimg>.inner {
+    height: calc(var(--captiononimg-height) * 1.2);
+    overflow: hidden;
+}
+
+.container .captiononimg img {
+    min-width: 470px;
+    /*max-width:calc(var(--captiononimg-width) * 1.2);*/
+    min-height: 470px;
+    max-height: calc(var(--captiononimg-height) * 1.2);
+    height: auto;
+    width: auto;
+}
+
+.container .captiononimg .text {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 80%;
+    overflow-y: auto;
+    letter-spacing: 0.1rem;
+    line-height: 1.8rem;
+    padding: 1rem;
+}
+
+.container .captiononimg .text * {
+    background-color: transparent;
+}
+
+.container .captiononimg .text .content-subtittle {
+	/************************* fffff */margin-bottom: 1rem;
+}
+.container .captiononimg.content .content-subtittle {
+    border-left: none;
+}
+
+
+.container .captiononimg .text p>span {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+@media (max-width: 1024px) {
+    .container .captiononimg.content>* {
+        width: 100%;
+    }
+
+    .container .captiononimg.content .content-caption {
+        display: block;
+    }
+
+    .container .captiononimg .text {
+        width: 90%;
+        height: auto;
+        line-height: 1.4rem;
+    }
+
+    .container .captiononimg img {
+        max-height: calc(var(--captiononimg-height) * 1.2);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .container .captiononimg img {
+        max-height: calc(var(--captiononimg-height) * 0.8);
+    }
+
+    .container .captiononimg .text {
+        line-height: 1.2rem;
+        padding: 0.5rem;
+    }
+
+    .container .captiononimg.content .content-subtittle {
+        font-size: large;
+    }
+
+    .container .captiononimg.content .content-caption {
+        font-size: small;
+    }
+}

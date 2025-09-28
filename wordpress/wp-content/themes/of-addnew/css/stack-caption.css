@@ -1,0 +1,63 @@
+@charset "utf-8";
+
+:root{
+	--stackCaption-mask-backgroundcolor: rgba(0,0,0,0.4); 
+	--stackCaption-caption-backgroundcolor: rgba(0,0,0,0); 
+}
+
+
+/*******************************************
+文字を重ねる
+*******************************************/
+.stack-caption {
+	overflow:		hidden;
+	position:		relative;	/* 相対位置指定 */
+    /*
+	width:			280px;
+	height:			188px;
+	margin:			10px 8px 10px 16px;
+    */
+}
+.stack-caption .mask {
+	width:			100%;
+	height:			100%;
+	position:		absolute;	/* 絶対位置指定 */
+	top:			0;
+	left:			0;
+	opacity:		0;	/* マスクを表示しない */
+	background-color:	var(--stackCaption-mask-backgroundcolor);	/* マスクは半透明 */
+	-webkit-transition:	all 0.2s ease;
+	transition:		all 0.2s ease;
+	display: flex;
+	align-items:center;
+}
+.stack-caption .caption {
+	text-align:     center;
+    vertical-align: middle;
+    /*top:calc(50% - 10px);*/
+	flex: 1;
+    width: 100%;
+	position:		absolute;	/* 絶対位置指定 */
+	background-color: var(--stackCaption-caption-backgroundcolor);
+}
+
+/* ホバー時のアクション */
+.stack-caption:hover .mask {
+	opacity:		1;	/* マスクを表示する */
+}
+.stack-caption:hover .caption {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	background-color: rgba(0,0,0,0.6);
+	padding: 2%;
+}
+
+@media screen and (max-width:1024px) {
+	/* スマホ、タブレットの場合はhoverせずに */
+	.stack-caption .mask {
+		opacity:		1;	/* マスクを表示する */
+	}
+}

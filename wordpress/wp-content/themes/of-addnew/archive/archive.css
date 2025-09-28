@@ -1,0 +1,88 @@
+#archive *{
+	font-size: 100px;
+	white-space: nowrap;
+}
+
+#archive{
+	margin: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	--width-date: 130px;
+	font-size: 18px;
+	overflow-Y: auto;
+	width: 100%;
+}
+#archive ul{
+	/*margin-left: 15px !important;*/
+	margin-top: 0;
+	margin-bottom: 0;
+}
+#archive ul .news-list{
+	border-bottom: dashed 1px var(--sub-color02);
+	margin-bottom: 0;
+	margin-top: 1em;
+}
+#archive ul .news-list > a{
+	margin-bottom:3px;
+	margin-top: 15px;
+	margin: auto;
+}
+#archive .news-list .title{
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+}
+#archive p{
+	margin: 0;
+}
+.navigation.pagination *{
+	color: var(--sub-color02);
+}
+
+/*----------------------
+   レスポンシブ対応
+  ----------------------*/
+@media screen and (max-width: 600px){
+
+	#archive{
+		--width-date: 0px;
+	}
+	#archive *{
+		font-size: medium;
+	}
+	#archive .items .news-list{
+		border-bottom: dashed 1px silver;
+		margin-bottom: 0;
+	}
+	.text-ellipsis{
+		width: 100%;
+	}
+	.news-list .title{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		-webkit-text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
+	}
+}
+@media screen and (min-width: 601px){
+
+	#archive *{
+		font-size: large;
+	}
+	#archive .text-ellipsis::after{
+		content: "";
+		margin-right: 5px;
+	}
+	#archive .text-ellipsis{
+		width: var(--width-date);
+	}
+	#archive .news-list .title{
+		width: calc(100% - var(--width-date));
+	}
+}
+@media screen and (min-width: 1025px){
+}

@@ -1,0 +1,393 @@
+/*
+ Theme Name:  nomurakamotsu
+*/
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+
+/* wordpress ログイン時に出る上のメニュー */
+#wpadminbar {
+    position: absolute;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+}
+
+:root {
+
+    --width-conteiner: 960px;
+
+    --marginTop-body: 0;
+    /*15px; */
+    --marginBottom-body: 15px;
+    --marginLeft-body: 0px;
+    --marginRight-body: 0px;
+
+    --marginTopBtm-content: 90px;
+
+    --wpadminbar-height: 0;
+
+    --main-color: black;
+    --main-backcolor: white;
+    --sub-color01: #00FF01;
+    --sub-color02: #00F;
+
+    --fontFamily-tittle: 'Noto Sans JP', sans-serif;
+    --fontFamily-text: "メイリオ", "Meiryo", Verdana, Helvetica, sans-serif;
+    --fontFamily-sub: 'Zen Antique', serif;
+
+    --fontSize-text: 1.2em;
+    --container-paddingTop: 30px;
+}
+
+body {
+    width: 100%;
+}
+
+@media (min-width: 1025px) {}
+
+@media (max-width: 1024px) {
+    * {
+        --width-conteiner: 80%;
+    }
+
+    .mediaQuery.min1025 {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    * {
+        --width-conteiner: 95%;
+    }
+
+    .mediaQuery.min601 {
+        display: none;
+    }
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+
+}
+
+img {
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--fontFamily-tittle);
+}
+
+a,
+p {
+    font-family: var(--fontFamily-text);
+}
+
+a,
+p,
+h1,
+h2,
+h3 {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+h3 {
+    font-size: 1.7em;
+}
+
+.textAlign-left {
+    text-align: left;
+}
+
+.textAlign-center {
+    text-align: center;
+}
+
+.textAlign-right {
+    text-align: right;
+}
+
+.fontWeight-bold {
+    font-weight: bold;
+}
+
+.page-description {
+    font-size: x-large;
+    line-height: 2.1em;
+    letter-spacing: 0.1em;
+}
+
+.page-description p>span {
+    display: block;
+}
+
+/*
+@media (max-width: 1024px) {
+    .page-description{
+        font-size: large;
+        line-height: 1.7em;
+    }
+}
+@media (max-width: 600px) {
+    .page-description{
+        font-size: small;
+        line-height: 1.3em;
+    }
+}
+*/
+@media (max-width: 600px) {
+    .page-description p {
+        text-align: left;
+    }
+
+    .page-description p>span {
+        display: inline;
+    }
+}
+
+.container:nth-child(1) {
+    padding-top: 0;
+}
+
+.container {
+    /*width:var(--width-conteiner);*/
+    max-width: 100%;
+    padding-top: calc(var(--marginTopBtm-content) / 2);
+    padding-bottom: calc(var(--marginTopBtm-content) / 2);
+    padding-left: calc((100% - var(--width-conteiner)) / 2);
+    padding-right: calc((100% - var(--width-conteiner)) / 2);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.container>.content:nth-of-type(1) {
+    padding-top: var(--marginTopBtm-content);
+}
+
+.container>*:nth-child(n + 2) {
+    width: 95%;
+    margin: auto;
+    padding-top: calc(var(--marginTopBtm-content) / 2);
+}
+
+.container>*:last-child {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.text-underline01 {
+    display: inline-block;
+    position: relative;
+    border-bottom: 7px solid var(--main-color);
+    padding-bottom: 9px;
+}
+
+.text-underline01::before {
+    width: 60%;
+    max-width: 20px;
+    position: absolute;
+    bottom: -7px;
+    height: 7px;
+    display: block;
+    content: "";
+    background: var(--sub-color01);
+}
+
+/* ポジション関連 */
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.position-absolute.centering {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+/* カラーセットスタイツ */
+.color-set02 {
+    background-color: var(--main-color);
+}
+
+.color-set02,
+.color-set02 * {
+    color: var(--main-backcolor);
+    border-color: var(--main-backcolor);
+}
+
+/* こっちを優先 */
+.color-set01 {
+    background-color: var(--main-backcolor);
+}
+
+.color-set01,
+.color-set01 * {
+    color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+/* 背景色がメインカラーのときに使う下線 */
+.content-tittle {
+    display: inline-block;
+    position: relative;
+    line-height: 1.3;
+    font-family: var(--fontFamily-tittle);
+    letter-spacing: 0.12em;
+    font-size: 20px;
+    border-bottom: 7px solid;
+}
+
+.content-tittle:before {
+    position: absolute;
+    bottom: -7px;
+    width: 50px;
+    height: 7px;
+    display: block;
+    content: "";
+    background: var(--sub-color01);
+}
+
+.content-subtittle {
+    font-family: var(--fontFamily-sub);
+    border-left: 7px solid var(--sub-color01);
+    text-align: left;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    padding-left: 0.5em;
+    font-size: 1.7em;
+}
+
+@media (max-width: 1024px) {
+    .content-subtittle {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 600px) {
+    .content-subtittle {
+        font-size: 1em;
+    }
+}
+
+/******************************************* 住所関連 */
+.post-no:before {
+    content: "〒";
+}
+
+.tell:before {
+    content: "TEL：";
+}
+
+.fax:before {
+    content: "FAX：";
+}
+
+
+/* スクロールによるスライドイン */
+.slidein {
+    opacity: 0;
+    transform: translate(0, 0);
+    transition: all 1.5s;
+    transform: translate(-30px, 0);
+}
+
+.slidein.js_active {
+    opacity: 1 !important;
+    transform: translate(0, 0) !important;
+}
+
+label.required:after {
+    color: red;
+    border: red 1px solid;
+    border-radius: 5px;
+    content: "必須";
+    padding: 1px 3px;
+    margin-left: 3px;
+}
+
+/* リンクボタン */
+.btn-link {
+    width: 100%;
+    height: 2em;
+    display: block;
+    text-align: center;
+    font-size: var(--fontSize-btnLink);
+}
+
+.btn-link,
+.btn-link>* {
+    font-family: var(--fontFamily-tittle);
+}
+
+.btn-link:hover {
+    background-color: gray;
+    color: #FFF;
+}
+
+@media (min-width: 1025px) {
+    :root {
+        --fontSize-btnLink: 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --fontSize-btnLink: 18px;
+    }
+}
+
+@media (max-width: 900px) {
+    :root {
+        --fontSize-btnLink: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --fontSize-btnLink: 0.6em;
+    }
+}
+
+
+/*
+#main {
+    --fontSize-text: 1.2em;
+    --marginTopBtm-content: 90px;
+}
+
+#main p,
+#main a {
+    padding: 5px;
+    font-size: var(--fontSize-text);
+    letter-spacing: 0.1em;
+    line-height: calc(var(--fontSize-text) + 0.6em);
+}
+
+@media (max-width: 1024px) {
+    #main {
+        --fontSize-text: 1.0em;
+        --marginTopBtm-content: 70px;
+    }
+}
+
+@media (max-width: 600px) {
+    #main {
+        --fontSize-text: 0.8em;
+        --marginTopBtm-content: 50px;
+    }
+}
+*/

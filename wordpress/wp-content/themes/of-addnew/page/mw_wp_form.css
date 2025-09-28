@@ -1,0 +1,95 @@
+.side-by-side.no-justify>.tell {
+    margin-right: 15px;
+}
+
+.mw_wp_form .item {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.mw_wp_form .item label {
+    font-family: var(--fontFamily-tittle);
+    font-size: large;
+}
+
+.mw_wp_form .item input,
+.mw_wp_form .item textarea {
+    margin-top: 10px;
+    padding: 5px;
+    font-family: var(--fontFamily-text);
+    width: calc(100% - 10px);
+    color: var(--main-color);
+    background-color:  var(--main-backcolor);;
+    font-size: large;
+}
+
+.mw_wp_form .item input {
+    border: none;
+    border-bottom: 1px solid var(--main-color);
+}
+
+.mw_wp_form .item input:focus,
+.mw_wp_form .item textarea:focus {
+    background-color: aliceblue;
+    outline: none;
+}
+
+.mw_wp_form .form-btn {
+    width: 80%;
+    margin: auto;
+
+}
+
+.mw_wp_form .form-btn>input {
+    width: 100%;
+    border: none;
+    height: 100%;
+}
+
+
+/**
+THANKSページ
+*/
+#thanks .thanks-message {
+    margin-top: 50px;
+    text-align: left;
+    background-color: rgb(232, 232, 232, 1);
+    padding: calc(var(--marginTopBtm-content) / 2) 15px !important;
+    font-size: medium;
+    letter-spacing: 0.1em;
+    line-height: calc(1.6em);
+}
+
+#thanks .thanks-message>div:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+#thanks .thanks-message span {
+    display: inline;
+}
+
+#thanks .thanks-message #tell {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#thanks .eigyosyo {
+    width: 95%;
+}
+
+#thanks .eigyosyo,
+#thanks .eigyosyo * {
+    border-color: var(--main-color) !important;
+}
+
+#thanks .eigyosyo .name p {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#thanks .cont-btn {
+    width: 80%;
+    margin: auto;
+}

@@ -1,0 +1,21 @@
+.img-central {
+  position: relative;
+  height: 100%;
+  overflow: hidden; /* はみ出たのは非表示に */
+}
+.img-central img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  /*
+  min-width: 100%;
+  min-height: 100%;
+  */
+  max-width: inherit;
+}
+.img-central .caption {
+  color: white;
+}
+

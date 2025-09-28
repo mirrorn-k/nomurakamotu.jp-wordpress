@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/* フッターCSS */
+#footer {
+    font-size: large;
+    --height-footer: auto;
+    --width-logo: 50%;
+    --width-container-space: 10px;
+    --width-companyInfo: calc(100% - var(--width-logo) - var(--width-container-space));
+    --width-companyInfo-office: 100%;
+}
+
+#footer * {
+    font-family: var(--fontFamily-text);
+}
+
+#footer img {
+    width: auto;
+}
+
+#footer>.container {
+    height: var(--height-footer);
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: space-between;
+}
+
+#footer .logo {
+    width: var(--width-logo);
+    justify-content: center;
+    align-items: center;
+}
+
+#footer .companyInfo {
+    width: var(--width-companyInfo);
+    justify-content: center;
+    align-items: center;
+}
+
+#footer .companyInfo>.office {
+    text-align: left;
+    padding-bottom: 20px;
+    width: var(--width-companyInfo-office);
+}
+
+#footer .companyInfo .address>span,
+#footer .companyInfo .phone-no>span {
+    padding-right: 1em;
+}
+
+#footer .companyInfo>.office {
+    text-align: left;
+    padding-bottom: 20px;
+}
+
+#footer .companyInfo>.office .officeName {
+    width: 6em;
+    font-family: var(--fontFamily-tittle);
+}
+
+@media (max-width: 1024px) {
+    #footer {
+        --width-logo: 100%;
+        --width-container-space: 0;
+        --width-companyInfo: 100%;
+        --width-companyInfo-office: 48%;
+    }
+
+    #footer>.container {
+        display: block;
+        margin: auto;
+    }
+
+    #footer .logo {
+        height: 45px;
+        margin-bottom: 15px;
+    }
+
+    #footer .companyInfo {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #footer .companyInfo .address>span,
+    #footer .companyInfo .phone-no>span {
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    #footer {
+        --height-footer: none;
+        --width-companyInfo: 100%;
+        --width-companyInfo-office: 100%;
+    }
+
+    #footer .companyInfo {
+        display: block;
+    }
+
+    #footer .companyInfo>.office {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #footer .companyInfo>.office>*:nth-child(1) {
+        width: 20%;
+        min-width: 100px;
+        text-align: right;
+    }
+
+    #footer .companyInfo>.office>*:nth-child(2) {
+        width: 60%;
+    }
+
+    #footer .companyInfo>.office .officeName {
+        width: 100%;
+    }
+
+    #footer .companyInfo .address>span {
+        display: block;
+        width: 100%;
+    }
+}
+
+#copyright {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
