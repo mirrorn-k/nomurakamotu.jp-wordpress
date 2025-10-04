@@ -24,3 +24,9 @@ down:
 
 login-php:
 	docker compose exec php sh
+
+prod-upd:
+	docker compose --profile prod up -d --build
+	
+prod-down:
+	docker compose --profile prod down
