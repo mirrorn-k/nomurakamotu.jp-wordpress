@@ -36,7 +36,7 @@ services:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
-      - "8080:80"
+      - "8260:80"
     networks:
       - wp_network
     profiles:
