@@ -7,7 +7,6 @@ services:
       args:
         UID: ${UID:-1001}
         GID: ${GID:-1001}
-    container_name: php
     volumes:
       - ./wordpress:/var/www/html
     networks:
@@ -16,7 +15,6 @@ services:
   db:
     image: mysql:5.7
     platform: linux/amd64 # 追加
-    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: wordpress
@@ -29,7 +27,6 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
     depends_on:
       - db
     environment:
@@ -44,7 +41,6 @@ services:
 
   nginx:
     image: nginx:latest
-    container_name: nginx
     depends_on:
       - php
     volumes:
