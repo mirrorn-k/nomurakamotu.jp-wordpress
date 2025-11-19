@@ -30,3 +30,6 @@ prod-upd:
 
 prod-down:
 	docker compose down
+
+backup:
+	docker exec suncreate-mysql mysqldump -uroot -p'rootpassword' wordpress > $(FILE)
