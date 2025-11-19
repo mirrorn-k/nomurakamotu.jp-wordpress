@@ -77,22 +77,32 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );
 
-# --- SSL 強制設定 ---
-if (
-    (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
-    (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ||
-    (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
-) {
-    $_SERVER['HTTPS'] = 'on';
-}
 
+
+/*
 define('FORCE_SSL_ADMIN', true);
+*/
+/*
 define('WP_HOME', 'https://nomurakamotsu.jp');
 define('WP_SITEURL', 'https://nomurakamotsu.jp');
+*/
 
+// --- ローカル環境（localhost / 8260）は必ず http を使う ---
+if (isset($_SERVER['HTTP_HOST'])) {
+    $host = $_SERVER['HTTP_HOST'];
 
+    if (strpos($host, 'localhost') !== false || strpos($host, '8260') !== false) {
+        $_SERVER['HTTPS'] = 'off';
+        $_SERVER['SERVER_PORT'] = 80;
+
+        define('WP_HOME', 'http://' . $host);
+        define('WP_SITEURL', 'http://' . $host);
+    }
+}
 
 /* That's all, stop editing! Happy publishing. */
 

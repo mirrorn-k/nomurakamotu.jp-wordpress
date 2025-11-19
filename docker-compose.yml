@@ -7,6 +7,7 @@ services:
       args:
         UID: ${UID:-1001}
         GID: ${GID:-1001}
+    container_name: nomurakamotsu-php
     volumes:
       - ./wordpress:/var/www/html
     networks:
@@ -20,6 +21,7 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: nomura
       MYSQL_PASSWORD: 8tWJM8mz
+    container_name: nomurakamotsu-mysql
     volumes:
       - db_data:/var/lib/mysql
     networks:
@@ -27,6 +29,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: nomurakamotsu-phpmyadmin
     depends_on:
       - db
     environment:
@@ -41,6 +44,7 @@ services:
 
   nginx:
     image: nginx:latest
+    container_name: nomurakamotsu-nginx
     depends_on:
       - php
     volumes:
