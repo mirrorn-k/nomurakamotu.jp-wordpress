@@ -10,6 +10,7 @@ services:
     container_name: nomurakamotsu-php
     volumes:
       - ./wordpress:/var/www/html
+      - ./php/msmtprc:/etc/msmtprc:ro
     networks:
       - wp_network
 
