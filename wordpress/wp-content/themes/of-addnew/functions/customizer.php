@@ -72,31 +72,27 @@ function get_the_topImgInfo(){
 	$ary_imgUrl = array();
 
 	/** 背景画像とフロント画像を取得 */
-	$ary_imgUrl["background"] = get_theme_mod( 'key-visual_img_background', "" );
-	$ary_imgUrl["front"] = get_theme_mod( 'key-visual_img_front', "" );
+	$ary_imgUrl["background"] = get_theme_mod( 'key-visual_img_background' );
+	$ary_imgUrl["front"] = get_theme_mod( 'key-visual_img_front' );
 
 	for($idx = 1; $idx <= 5; $idx++){
 	
 		$idx_char = str_pad( $idx , 2, 0, STR_PAD_LEFT);
-		$idx_val = get_theme_mod( 'key-visual_img' . $idx_char , "");
+		$idx_val = get_theme_mod( 'key-visual_img' . $idx_char );
 		
 		if($idx_val == null){
 			continue;
 		}
-		$ary_imgUrl[$idx_char] = get_theme_mod( 'key-visual_img' . $idx_char , "");
+		$ary_imgUrl[$idx_char] = get_theme_mod( 'key-visual_img' . $idx_char );
 	}
 
 	if(count($ary_imgUrl) == 0){ // 一つも設定していない場合、デフォルト画像をセット
 		$ary_imgUrl[0] = Get_defaultImg();
 	}
 	
-	foreach ($ary_imgUrl as $idx => $url) {
-		if (is_ssl()) {
-			$ary_imgUrl[$idx] = str_replace("http://", "https://", $url);
-		} else {
-			$ary_imgUrl[$idx] = str_replace("https://", "http://", $url);
-		}
-	}
+    foreach($ary_imgUrl as $idx => $url){
+        $ary_imgUrl[$idx] = str_replace("http://", "https://", $ary_imgUrl[$idx]);
+    }
 
 	return $ary_imgUrl;
 }

@@ -421,7 +421,7 @@ label.required:after {
 /**
  * ハニートラップ用
  * */
-.subject {
+.content {
   position: absolute;
   left: -9999px;
   top: auto;

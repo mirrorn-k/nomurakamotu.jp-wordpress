@@ -79,6 +79,21 @@ $table_prefix = 'wp_';
  */
 define( 'WP_DEBUG', false );
 
+# --- SSL 強制設定 ---
+if (
+    (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
+    (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ||
+    (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
+) {
+    $_SERVER['HTTPS'] = 'on';
+}
+
+define('FORCE_SSL_ADMIN', true);
+define('WP_HOME', 'https://nomurakamotsu.jp');
+define('WP_SITEURL', 'https://nomurakamotsu.jp');
+
+
+
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
@@ -88,3 +103,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+

@@ -3,7 +3,7 @@
  * Plugin name: Smart Custom Fields
  * Plugin URI: https://github.com/inc2734/smart-custom-fields/
  * Description: Smart Custom Fields is a simple plugin that management custom fields.
- * Version: 4.2.2
+ * Version: 5.0.4
  * Author: inc2734
  * Author URI: https://2inc.org
  * Text Domain: smart-custom-fields
@@ -15,6 +15,20 @@
  * @author inc2734
  * @license GPL-2.0+
  */
+
+/**
+ * Directory url of this plugin.
+ *
+ * @var string
+ */
+define( 'SMART_CUSTOM_FIELDS_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
+
+/**
+ * Directory path of this plugin.
+ *
+ * @var string
+ */
+define( 'SMART_CUSTOM_FIELDS_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 
 /**
  * Main class.
@@ -34,25 +48,32 @@ class Smart_Custom_Fields {
 	}
 
 	/**
-	 * Loading translation files
+	 * Plugins loaded.
 	 */
 	public function plugins_loaded() {
-		load_plugin_textdomain(
-			'smart-custom-fields',
-			false,
-			dirname( plugin_basename( __FILE__ ) ) . '/languages'
-		);
-
 		do_action( SCF_Config::PREFIX . 'load' );
-		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.meta.php';
-		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.setting.php';
-		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.group.php';
-		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.abstract-field-base.php';
-		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.revisions.php';
-		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.ajax.php';
-		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.options-page.php';
-		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.cache.php';
+
 		require_once plugin_dir_path( __FILE__ ) . 'classes/class.scf.php';
+		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.abstract-field-base.php';
+		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.ajax.php';
+		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.cache.php';
+		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.group.php';
+		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.meta.php';
+		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.options-page.php';
+		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.setting.php';
+
+		add_action( 'init', array( $this, '_init' ) );
+		add_action( 'init', array( $this, 'register_post_type' ) );
+		add_action( 'init', array( $this, 'ajax_request' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'current_screen', array( $this, 'current_screen' ) );
+	}
+
+	/**
+	 * Initialize.
+	 */
+	public function _init() {
+		require_once plugin_dir_path( __FILE__ ) . 'classes/models/class.revisions.php';
 		new Smart_Custom_Fields_Revisions();
 
 		if ( function_exists( 'wpseo_init' ) ) {
@@ -70,18 +91,10 @@ class Smart_Custom_Fields {
 			}
 		}
 
-		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ) );
-		add_action( 'init', array( $this, 'register_post_type' ) );
-		add_action( 'init', array( $this, 'ajax_request' ) );
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-		add_action( 'current_screen', array( $this, 'current_screen' ) );
-	}
-
-	/**
-	 * The action hook provides in after_setup_themeto be able to add fields
-	 * from themes not only plugins.
-	 */
-	public function after_setup_theme() {
+		/**
+		 * The action hook provides in after_setup_themeto be able to add fields
+		 * from themes not only plugins.
+		 */
 		do_action( SCF_Config::PREFIX . 'fields-loaded' );
 	}
 
@@ -102,6 +115,7 @@ class Smart_Custom_Fields {
 		delete_post_meta_by_key( SCF_Config::PREFIX . 'repeat-multiple-data' );
 
 		// option の smart-cf-xxx を削除
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		global $wpdb;
 		$wpdb->query(
 			$wpdb->prepare(
@@ -112,6 +126,7 @@ class Smart_Custom_Fields {
 				SCF_Config::PREFIX . '%'
 			)
 		);
+		// phpcs:enable
 	}
 
 	/**
@@ -252,11 +267,17 @@ class Smart_Custom_Fields {
 	 */
 	protected function get_post_id_in_admin() {
 		$post_id = false;
-		if ( ! empty( $_GET['post'] ) ) {
-			$post_id = $_GET['post'];
-		} elseif ( ! empty( $_POST['post_ID'] ) ) {
-			$post_id = $_POST['post_ID'];
+		$_post   = filter_input( INPUT_GET, 'post' );
+
+		if ( ! empty( $_post ) ) {
+			$post_id = $_post;
 		}
+
+		$_post_id = filter_input( INPUT_POST, 'post_ID' );
+		if ( ! empty( $_post_id ) ) {
+			$post_id = $_post_id;
+		}
+
 		return $post_id;
 	}
 
@@ -266,16 +287,24 @@ class Smart_Custom_Fields {
 	 * @return int
 	 */
 	protected function get_user_id_in_admin() {
-		$screen  = get_current_screen();
-		$user_id = false;
-		if ( ! empty( $_GET['user_id'] ) ) {
-			$user_id = $_GET['user_id'];
-		} elseif ( ! empty( $_POST['user_id'] ) ) {
-			$user_id = $_POST['user_id'];
-		} elseif ( 'profile' === $screen->id ) {
+		$screen   = get_current_screen();
+		$user_id  = false;
+		$_user_id = filter_input( INPUT_GET, 'user_id' );
+
+		if ( ! empty( $_user_id ) ) {
+			$user_id = $_user_id;
+		}
+
+		$_user_id = filter_input( INPUT_POST, 'user_id' );
+		if ( ! empty( $_user_id ) ) {
+			$user_id = $_user_id;
+		}
+
+		if ( 'profile' === $screen->id ) {
 			$current_user = wp_get_current_user();
 			$user_id      = $current_user->ID;
 		}
+
 		return $user_id;
 	}
 
@@ -286,11 +315,16 @@ class Smart_Custom_Fields {
 	 */
 	protected function get_term_id_in_admin() {
 		$term_id = false;
-		if ( ! empty( $_GET['tag_ID'] ) ) {
-			$term_id = $_GET['tag_ID'];
-		} elseif ( ! empty( $_POST['tag_ID'] ) ) {
-			$term_id = $_POST['tag_ID'];
+		$tag_id  = filter_input( INPUT_GET, 'tag_ID' );
+		if ( ! empty( $tag_id ) ) {
+			$term_id = $tag_id;
 		}
+
+		$tag_id = filter_input( INPUT_POST, 'tag_ID' );
+		if ( ! empty( $tag_id ) ) {
+			$term_id = $tag_id;
+		}
+
 		return $term_id;
 	}
 }

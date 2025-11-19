@@ -4,7 +4,6 @@
 // カスタマイズから取得
 $aryImg = get_the_topImgInfo();
 
-
 $img_background = $aryImg["background"]; unset($aryImg["background"]);
 $img_front = $aryImg["front"]; unset($aryImg["front"]); 
 

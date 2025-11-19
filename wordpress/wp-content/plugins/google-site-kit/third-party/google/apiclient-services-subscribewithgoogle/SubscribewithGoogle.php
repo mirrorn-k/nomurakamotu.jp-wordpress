@@ -1,7 +1,5 @@
 <?php
 
-namespace Google\Site_Kit_Dependencies;
-
 /*
  * Copyright 2014 Google Inc.
  *
@@ -17,14 +15,18 @@ namespace Google\Site_Kit_Dependencies;
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+namespace Google\Site_Kit_Dependencies\Google\Service;
+
+use Google\Site_Kit_Dependencies\Google\Client;
 /**
  * Service definition for SubscribewithGoogle (v1).
  *
  * <p>
  * The Subscribe with Google Publication APIs enable a publisher to fetch
  * information related to their SwG subscriptions, including the entitlement
- * status of users who are requesting publisher content and the publications
- * owned by the publisher.</p>
+ * status of users who are requesting publisher content, the publications owned
+ * by the publisher, the entitlements plans of their SwG readers, the readers'
+ * profile information and purchase order information.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -33,333 +35,40 @@ namespace Google\Site_Kit_Dependencies;
  *
  * @author Google, Inc.
  */
-class Google_Service_SubscribewithGoogle extends \Google\Site_Kit_Dependencies\Google_Service
+class SubscribewithGoogle extends \Google\Site_Kit_Dependencies\Google\Service
 {
+    /** See and review your subscription information. */
+    const SUBSCRIBEWITHGOOGLE_PUBLICATIONS_ENTITLEMENTS_READONLY = "https://www.googleapis.com/auth/subscribewithgoogle.publications.entitlements.readonly";
     /** See your primary Google Account email address. */
     const USERINFO_EMAIL = "https://www.googleapis.com/auth/userinfo.email";
     public $publications;
     public $publications_entitlements;
+    public $publications_readers;
+    public $publications_readers_entitlementsplans;
+    public $publications_readers_orders;
+    public $rootUrlTemplate;
     /**
      * Constructs the internal representation of the SubscribewithGoogle service.
      *
-     * @param Google_Client $client
+     * @param Client|array $clientOrConfig The client used to deliver requests, or a
+     *                                     config array to pass to a new Client instance.
+     * @param string $rootUrl The root URL used for requests to the service.
      */
-    public function __construct(\Google\Site_Kit_Dependencies\Google_Client $client)
+    public function __construct($clientOrConfig = [], $rootUrl = null)
     {
-        parent::__construct($client);
-        $this->rootUrl = 'https://subscribewithgoogle.googleapis.com/';
+        parent::__construct($clientOrConfig);
+        $this->rootUrl = $rootUrl ?: 'https://subscribewithgoogle.googleapis.com/';
+        $this->rootUrlTemplate = $rootUrl ?: 'https://subscribewithgoogle.UNIVERSE_DOMAIN/';
         $this->servicePath = '';
         $this->batchPath = 'batch';
         $this->version = 'v1';
         $this->serviceName = 'subscribewithgoogle';
-        $this->publications = new \Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_Publications_Resource($this, $this->serviceName, 'publications', array('methods' => array('list' => array('path' => 'v1/publications', 'httpMethod' => 'GET', 'parameters' => array('pageSize' => array('location' => 'query', 'type' => 'integer'), 'filter' => array('location' => 'query', 'type' => 'string'), 'pageToken' => array('location' => 'query', 'type' => 'string'))))));
-        $this->publications_entitlements = new \Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_PublicationsEntitlements_Resource($this, $this->serviceName, 'entitlements', array('methods' => array('list' => array('path' => 'v1/publications/{publicationId}/entitlements', 'httpMethod' => 'GET', 'parameters' => array('publicationId' => array('location' => 'path', 'type' => 'string', 'required' => \true), 'pageSize' => array('location' => 'query', 'type' => 'integer'), 'pageToken' => array('location' => 'query', 'type' => 'string'))))));
+        $this->publications = new \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Resource\Publications($this, $this->serviceName, 'publications', ['methods' => ['list' => ['path' => 'v1/publications', 'httpMethod' => 'GET', 'parameters' => ['filter' => ['location' => 'query', 'type' => 'string'], 'pageSize' => ['location' => 'query', 'type' => 'integer'], 'pageToken' => ['location' => 'query', 'type' => 'string']]]]]);
+        $this->publications_entitlements = new \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Resource\PublicationsEntitlements($this, $this->serviceName, 'entitlements', ['methods' => ['list' => ['path' => 'v1/publications/{publicationId}/entitlements', 'httpMethod' => 'GET', 'parameters' => ['publicationId' => ['location' => 'path', 'type' => 'string', 'required' => \true], 'pageSize' => ['location' => 'query', 'type' => 'integer'], 'pageToken' => ['location' => 'query', 'type' => 'string']]]]]);
+        $this->publications_readers = new \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Resource\PublicationsReaders($this, $this->serviceName, 'readers', ['methods' => ['get' => ['path' => 'v1/{+name}', 'httpMethod' => 'GET', 'parameters' => ['name' => ['location' => 'path', 'type' => 'string', 'required' => \true]]]]]);
+        $this->publications_readers_entitlementsplans = new \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Resource\PublicationsReadersEntitlementsplans($this, $this->serviceName, 'entitlementsplans', ['methods' => ['get' => ['path' => 'v1/{+name}', 'httpMethod' => 'GET', 'parameters' => ['name' => ['location' => 'path', 'type' => 'string', 'required' => \true]]], 'list' => ['path' => 'v1/{+parent}/entitlementsplans', 'httpMethod' => 'GET', 'parameters' => ['parent' => ['location' => 'path', 'type' => 'string', 'required' => \true], 'pageSize' => ['location' => 'query', 'type' => 'integer'], 'pageToken' => ['location' => 'query', 'type' => 'string']]]]]);
+        $this->publications_readers_orders = new \Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle\Resource\PublicationsReadersOrders($this, $this->serviceName, 'orders', ['methods' => ['get' => ['path' => 'v1/{+name}', 'httpMethod' => 'GET', 'parameters' => ['name' => ['location' => 'path', 'type' => 'string', 'required' => \true]]]]]);
     }
 }
-/**
- * The "publications" collection of methods.
- * Typical usage is:
- *  <code>
- *   $subscribewithgoogleService = new Google_Service_SubscribewithGoogle(...);
- *   $publications = $subscribewithgoogleService->publications;
- *  </code>
- */
-class Google_Service_SubscribewithGoogle_Publications_Resource extends \Google\Site_Kit_Dependencies\Google_Service_Resource
-{
-    /**
-     * List all publications based on the filter, only the publications owned by the
-     * current user will be returned (publications.listPublications)
-     *
-     * @param array $optParams Optional parameters.
-     *
-     * @opt_param int pageSize LINT.IfChange The maximum number of publications to
-     * return, the service may return fewer than this value. if unspecified, at most
-     * 100 publications will be returned. The maximum value is 1000; values above
-     * 1000 will be coerced to 1000. LINT.ThenChange(//depot/google3/java/com/google
-     * /subscribewithgoogle/client/opservice/ListPublicationsPromiseGraph.java)
-     * @opt_param string filter Filters the publications list. e.g.
-     * verified_domains: "xyz.com" Grammar defined as https://google.aip.dev/160.
-     * @opt_param string pageToken A token identifying a page of results the server
-     * should return.
-     * @return Google_Service_SubscribewithGoogle_ListPublicationsResponse
-     */
-    public function listPublications($optParams = array())
-    {
-        $params = array();
-        $params = \array_merge($params, $optParams);
-        return $this->call('list', array($params), Google_Service_SubscribewithGoogle_ListPublicationsResponse::class);
-    }
-}
-/**
- * The "entitlements" collection of methods.
- * Typical usage is:
- *  <code>
- *   $subscribewithgoogleService = new Google_Service_SubscribewithGoogle(...);
- *   $entitlements = $subscribewithgoogleService->entitlements;
- *  </code>
- */
-class Google_Service_SubscribewithGoogle_PublicationsEntitlements_Resource extends \Google\Site_Kit_Dependencies\Google_Service_Resource
-{
-    /**
-     * Gets a set of entitlements for the user for this publication. The publication
-     * can fetch entitlements on behalf of a user authenticated via OAuth2.
-     * (entitlements.listPublicationsEntitlements)
-     *
-     * @param string $publicationId Mapped to the URL.
-     * @param array $optParams Optional parameters.
-     *
-     * @opt_param int pageSize Requested page size. If unspecified, server will pick
-     * an appropriate default.
-     * @opt_param string pageToken A token identifying a page of results the server
-     * should return. Typically, this is the value of
-     * ListEntitlementsResponse.next_page_token returned from the previous call to
-     * `ListEntitlements` method.
-     * @return Google_Service_SubscribewithGoogle_ListEntitlementsResponse
-     */
-    public function listPublicationsEntitlements($publicationId, $optParams = array())
-    {
-        $params = array('publicationId' => $publicationId);
-        $params = \array_merge($params, $optParams);
-        return $this->call('list', array($params), Google_Service_SubscribewithGoogle_ListEntitlementsResponse::class);
-    }
-}
-class Google_Service_SubscribewithGoogle_BusinessPredicates extends \Google\Site_Kit_Dependencies\Google_Model
-{
-    protected $internal_gapi_mappings = array();
-    public $canSell;
-    public $supportsSiteKit;
-    public function setCanSell($canSell)
-    {
-        $this->canSell = $canSell;
-    }
-    public function getCanSell()
-    {
-        return $this->canSell;
-    }
-    public function setSupportsSiteKit($supportsSiteKit)
-    {
-        $this->supportsSiteKit = $supportsSiteKit;
-    }
-    public function getSupportsSiteKit()
-    {
-        return $this->supportsSiteKit;
-    }
-}
-class Google_Service_SubscribewithGoogle_Entitlement extends \Google\Site_Kit_Dependencies\Google_Collection
-{
-    protected $collection_key = 'products';
-    protected $internal_gapi_mappings = array();
-    public $name;
-    public $products;
-    public $source;
-    public $subscriptionToken;
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-    public function getName()
-    {
-        return $this->name;
-    }
-    public function setProducts($products)
-    {
-        $this->products = $products;
-    }
-    public function getProducts()
-    {
-        return $this->products;
-    }
-    public function setSource($source)
-    {
-        $this->source = $source;
-    }
-    public function getSource()
-    {
-        return $this->source;
-    }
-    public function setSubscriptionToken($subscriptionToken)
-    {
-        $this->subscriptionToken = $subscriptionToken;
-    }
-    public function getSubscriptionToken()
-    {
-        return $this->subscriptionToken;
-    }
-}
-class Google_Service_SubscribewithGoogle_ListEntitlementsResponse extends \Google\Site_Kit_Dependencies\Google_Collection
-{
-    protected $collection_key = 'entitlements';
-    protected $internal_gapi_mappings = array();
-    protected $entitlementsType = Google_Service_SubscribewithGoogle_Entitlement::class;
-    protected $entitlementsDataType = 'array';
-    public $nextPageToken;
-    public function setEntitlements($entitlements)
-    {
-        $this->entitlements = $entitlements;
-    }
-    public function getEntitlements()
-    {
-        return $this->entitlements;
-    }
-    public function setNextPageToken($nextPageToken)
-    {
-        $this->nextPageToken = $nextPageToken;
-    }
-    public function getNextPageToken()
-    {
-        return $this->nextPageToken;
-    }
-}
-class Google_Service_SubscribewithGoogle_ListPublicationsResponse extends \Google\Site_Kit_Dependencies\Google_Collection
-{
-    protected $collection_key = 'publications';
-    protected $internal_gapi_mappings = array();
-    public $nextPageToken;
-    protected $publicationsType = Google_Service_SubscribewithGoogle_Publication::class;
-    protected $publicationsDataType = 'array';
-    public function setNextPageToken($nextPageToken)
-    {
-        $this->nextPageToken = $nextPageToken;
-    }
-    public function getNextPageToken()
-    {
-        return $this->nextPageToken;
-    }
-    public function setPublications($publications)
-    {
-        $this->publications = $publications;
-    }
-    public function getPublications()
-    {
-        return $this->publications;
-    }
-}
-class Google_Service_SubscribewithGoogle_PaymentOptions extends \Google\Site_Kit_Dependencies\Google_Model
-{
-    protected $internal_gapi_mappings = array();
-    public $contributions;
-    public $subscriptions;
-    public $thankStickers;
-    public function setContributions($contributions)
-    {
-        $this->contributions = $contributions;
-    }
-    public function getContributions()
-    {
-        return $this->contributions;
-    }
-    public function setSubscriptions($subscriptions)
-    {
-        $this->subscriptions = $subscriptions;
-    }
-    public function getSubscriptions()
-    {
-        return $this->subscriptions;
-    }
-    public function setThankStickers($thankStickers)
-    {
-        $this->thankStickers = $thankStickers;
-    }
-    public function getThankStickers()
-    {
-        return $this->thankStickers;
-    }
-}
-class Google_Service_SubscribewithGoogle_Product extends \Google\Site_Kit_Dependencies\Google_Model
-{
-    protected $internal_gapi_mappings = array();
-    public $name;
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-    public function getName()
-    {
-        return $this->name;
-    }
-}
-class Google_Service_SubscribewithGoogle_Publication extends \Google\Site_Kit_Dependencies\Google_Collection
-{
-    protected $collection_key = 'verifiedDomains';
-    protected $internal_gapi_mappings = array();
-    public $displayName;
-    public $onboardingState;
-    protected $paymentOptionsType = Google_Service_SubscribewithGoogle_PaymentOptions::class;
-    protected $paymentOptionsDataType = '';
-    protected $productsType = Google_Service_SubscribewithGoogle_Product::class;
-    protected $productsDataType = 'array';
-    public $publicationId;
-    protected $publicationPredicatesType = Google_Service_SubscribewithGoogle_PublicationPredicates::class;
-    protected $publicationPredicatesDataType = '';
-    public $verifiedDomains;
-    public function setDisplayName($displayName)
-    {
-        $this->displayName = $displayName;
-    }
-    public function getDisplayName()
-    {
-        return $this->displayName;
-    }
-    public function setOnboardingState($onboardingState)
-    {
-        $this->onboardingState = $onboardingState;
-    }
-    public function getOnboardingState()
-    {
-        return $this->onboardingState;
-    }
-    public function setPaymentOptions(\Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_PaymentOptions $paymentOptions)
-    {
-        $this->paymentOptions = $paymentOptions;
-    }
-    public function getPaymentOptions()
-    {
-        return $this->paymentOptions;
-    }
-    public function setProducts($products)
-    {
-        $this->products = $products;
-    }
-    public function getProducts()
-    {
-        return $this->products;
-    }
-    public function setPublicationId($publicationId)
-    {
-        $this->publicationId = $publicationId;
-    }
-    public function getPublicationId()
-    {
-        return $this->publicationId;
-    }
-    public function setPublicationPredicates(\Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_PublicationPredicates $publicationPredicates)
-    {
-        $this->publicationPredicates = $publicationPredicates;
-    }
-    public function getPublicationPredicates()
-    {
-        return $this->publicationPredicates;
-    }
-    public function setVerifiedDomains($verifiedDomains)
-    {
-        $this->verifiedDomains = $verifiedDomains;
-    }
-    public function getVerifiedDomains()
-    {
-        return $this->verifiedDomains;
-    }
-}
-class Google_Service_SubscribewithGoogle_PublicationPredicates extends \Google\Site_Kit_Dependencies\Google_Model
-{
-    protected $internal_gapi_mappings = array();
-    protected $businessPredicatesType = Google_Service_SubscribewithGoogle_BusinessPredicates::class;
-    protected $businessPredicatesDataType = '';
-    public function setBusinessPredicates(\Google\Site_Kit_Dependencies\Google_Service_SubscribewithGoogle_BusinessPredicates $businessPredicates)
-    {
-        $this->businessPredicates = $businessPredicates;
-    }
-    public function getBusinessPredicates()
-    {
-        return $this->businessPredicates;
-    }
-}
+// Adding a class alias for backwards compatibility with the previous class name.
+\class_alias(\Google\Site_Kit_Dependencies\Google\Service\SubscribewithGoogle::class, 'Google\\Site_Kit_Dependencies\\Google_Service_SubscribewithGoogle');
