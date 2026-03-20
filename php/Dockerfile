@@ -1,0 +1,37 @@
+FROM php:8.4-fpm
+
+# www-data の UID/GID をホストに合わせる
+ARG UID=1001
+ARG GID=1001
+
+RUN usermod -u ${UID} www-data && groupmod -g ${GID} www-data
+
+# 必要な拡張機能をインストール
+RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli
+
+# インポートするための設定
+RUN echo "upload_max_filesize = 2G" > /usr/local/etc/php/conf.d/uploads.ini
+RUN echo "post_max_size = 2G" >> /usr/local/etc/php/conf.d/uploads.ini
+RUN echo "memory_limit = 512MB" >> /usr/local/etc/php/conf.d/uploads.ini
+
+
+# ★ EOLなので署名チェックを無視してインストール（必須）
+RUN apt-get update && apt-get install -y \
+    msmtp \
+    msmtp-mta \
+    ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+
+# PHP に sendmail_path を設定
+RUN echo "sendmail_path = /usr/bin/msmtp -t" > /usr/local/etc/php/conf.d/msmtp.ini
+
+
+# 作業ディレクトリを設定
+WORKDIR /var/www/html
+
+# ★ これが本質
+USER www-data
+
+# コンテナのポートを設定（必要に応じて）
+EXPOSE 9000

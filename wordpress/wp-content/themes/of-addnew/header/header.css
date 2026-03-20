@@ -1,0 +1,422 @@
+/*
+ Theme Name:  
+*/
+@charset "UTF-8";
+
+:root {
+	--megamenu-height: 68px;
+	--hanbugerMenu-height: var(--megamenu-height);
+	--hanbugerMenu-color: var(--main-color);
+	--hanbugerMenu-backcolor: var(--main-backcolor);
+	--runningBottomLine-color: var(--sub-color01);
+	--runningBottomLine-backcolor: var(--main-backcolor);
+}
+
+@media screen and (max-width: 1024px) {
+	:root {
+		--megamenu-height: 48px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	:root {
+		--megamenu-height: 34px;
+	}
+}
+body.home header{
+	background-color: var(--main-color);
+	padding-bottom: 40px;
+}
+header {
+	margin-bottom: 50px;
+}
+@media screen and (max-width: 1024px) {
+	header {
+		padding-bottom: 30px;
+	}
+}
+@media screen and (max-width: 600px) {
+	header {
+		padding-bottom: 20px;
+	}
+}
+
+#mega-menu {
+	font-size: large;
+	position: sticky;
+	top: 0;
+	z-index: 99;
+	margin-bottom: 0;
+	height: var(--megamenu-height);
+	box-shadow: 0 0 8px grey;
+	overflow: hidden;
+}
+
+#mega-menu * {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+#mega-menu ul {
+	padding: 0;
+	list-style: none;
+}
+
+#mega-menu h1 {
+	margin: 0;
+}
+
+#mega-menu .site-branding .angle {
+	--angle-size: calc(var(--megamenu-height) + 20px);
+	content: "";
+	display: block;
+	width: var(--angle-size);
+	height: var(--angle-size);
+	clip-path: polygon(0px 0px, 0px var(--angle-size), var(--angle-size) 0px);
+	transform: rotate(180deg);
+	
+	position: relative;
+	right: -5px;
+    top: -19px;
+}
+
+
+/***********************
+ロゴをサイト名横に表示する
+***********************/
+.site-title {
+	display: inline-block;
+}
+
+#mega-menu .site-branding {
+	margin: 0;
+	display: flex;
+	max-width: 80%;
+	height: var(--megamenu-height);
+}
+
+#mega-menu img {
+	max-height: 100%;
+	height: calc(var(--megamenu-height) - 10px);
+	width: auto;
+	margin: 0;
+	padding-left: 5px;
+	top: 5px;
+	position: relative;
+
+}
+
+#mega-menu .site-description {
+	height: 20px;
+	margin-left: 5px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+#mega-menu #site-navigation {
+	margin-left: auto;
+	/*margin-right: 5px;*/
+}
+
+#mega-menu .hamburger-menu>.menu-btn {
+	position: relative;
+	top: 0;
+	right: 0;
+}
+
+#mega-menu .topMenu.pc ul {
+	margin: auto 0;
+}
+
+#mega-menu .topMenu.pc a {
+	height: var(--megamenu-height);
+	/* display: block; */
+	padding: 0 10px;
+	align-items: center;
+	line-height: var(--megamenu-height);
+	-webkit-box-align: center;
+}
+
+/* キービジュアルについて */
+header .mainImg {
+	overflow: hidden;
+}
+
+header .mainImg .slider {
+	margin: 0;
+}
+
+header .mainImg .slick-slide:not(.slick-center) {
+	/*
+	-webkit-transform: scale(0.9);
+	-moz-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	-o-transform: scale(0.9);
+	transform: scale(0.9);
+	*/
+	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
+	transition: 0.2s linear;
+}
+
+header .mainImg a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+header .mainImg .front {
+	position: absolute;
+	z-index: 10;
+	width: 80%;
+	margin-left: 10%;
+}
+
+header .mainImg .background {
+	position: absolute;
+	width: 80%;
+	margin-left: 10%;
+}
+
+/* キービジュアルが一つの場合 */
+header .mainImg.img {
+	margin: auto;
+	width: auto;
+	width: 100%;
+}
+
+/* キービジュアルが複数（slick slider)の場合 */
+/*
+header .mainImg.frontpage.img-ary ul.slider{
+	height: 100%;
+	margin-top: 0;
+}
+header .mainImg.frontpage.img-ary li{
+	height: var(--height-mainImg-front);
+}
+header .mainImg.frontpage.img-ary img{
+	width: auto;
+	height: 100%;
+	min-width: 100%; 
+	min-height: 100%;
+    max-width: 200%;
+    max-height: 150%;
+}
+*/
+@media screen and (max-width: 1024px) {
+
+	header .mainImg .front,
+	header .mainImg .background {
+		width: 100%;
+		margin: 0;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	header .mainImg .slick-slide {
+		overflow: hidden;
+	}
+
+	header .mainImg img {
+		width: 110vw;
+		margin: auto;
+		max-height: 100%;
+		/*
+		max-width: 100%;
+		*/
+		object-fit: cover;
+		height: auto;
+	}
+}
+
+/*　電話番号　*/
+#tell {
+	--width-tell: calc(var(--width-conteiner) * 0.9);
+	width: 100%;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding-left: calc((100% - var(--width-tell)) / 2);
+	padding-right: calc((100% - var(--width-tell)) / 2);
+	padding-top: 0;
+	padding-bottom: 0;
+	--width-eigyosyo-name: 25%;
+	--width-eigyosyo-number: calc(100% - var(--width-eigyosyo-name));
+	--height-tell: 90px;
+}
+
+#tell * {
+	font-family: var(--fontFamily-tittle);
+}
+
+#tell .eigyosyo {
+	width: 50%;
+	height: var(--height-tell);
+	display: flex;
+	border: var(--main-backcolor) solid 1px;
+	border-radius: 10px;
+	margin: 5px;
+	align-items: center;
+	padding: 0
+}
+
+#tell .eigyosyo .name {
+	text-align: center;
+	border-right: var(--main-backcolor) solid 1px;
+	width: var(--width-eigyosyo-name);
+}
+
+#tell .eigyosyo .number {
+	width: var(--width-eigyosyo-number);
+	text-align: center;
+}
+
+#tell .number img {
+	margin-right: 0.2em;
+	vertical-align: unset;
+	width: auto;
+	height: 34px;
+	width: 34px;
+}
+
+#tell .number>p {
+	font-size: xx-large;
+}
+
+#tell .name>p {
+	font-size: large;
+}
+
+@media (max-width: 1024px) {
+	#tell {
+		--height-tell: 50px;
+	}
+
+	#tell .number>p {
+		font-size: large;
+	}
+
+	#tell .name>p {
+		font-size: small;
+	}
+
+	#tell .number img {
+		vertical-align: top;
+	}
+}
+
+@media (max-width: 600px) {
+	#tell {
+		display: block;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
+	#tell .eigyosyo {
+		width: calc(var(--width-conteiner) * 0.9);
+		margin: auto;
+	}
+
+	#tell .eigyosyo:nth-child(n + 2) {
+		margin-top: 5px;
+	}
+}
+
+/*----------------------
+   フロントページ以外
+  ----------------------*/
+header .no-frontpage {
+	height: 100px;
+}
+
+header .no-frontpage.stack-caption {
+	pointer-events: none;
+}
+
+header .no-frontpage.stack-caption>.mask {
+	opacity: 1;
+}
+
+header .no-frontpage.stack-caption>.mask>.caption {
+	font-size: x-large;
+}
+
+header .no-frontpage.stack-caption>.mask>.caption>span {
+	border-left: var(--sub-color01) 8px solid;
+	padding-left: 10px;
+}
+
+/*----------------------
+   レスポンシブ対応
+  ----------------------*/
+@media screen and (min-width: 600px) {
+	#site-navigation>.topMenu.mobile {
+		display: none;
+	}
+
+	#site-navigation>.topMenu {
+		display: block;
+		height: 100%;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	#site-navigation>.topMenu.mobile {
+		display: block;
+	}
+
+	#site-navigation>.topMenu {
+		display: none;
+	}
+
+	header .site-description {
+		font-size: small;
+	}
+
+	/*
+	header .site-branding{
+		max-width: 80%
+	}
+	*/
+}
+
+@media screen and (max-width: 600px) {
+	header .no-frontpage img {
+		height: 100%;
+		width: auto;
+	}
+}
+
+
+/*----------------------
+スマホ表示のメニューカバー
+----------------------*/
+header .topMenu.mobile .menu-content {
+	padding-top: 200px;
+	padding-left: 5%;
+	padding-right: 5%;
+	justify-content: center;
+}
+
+header .topMenu.mobile .menu-content .site-logo {
+	width: 100px;
+	margin: auto;
+}
+
+header .topMenu.mobile .menu-content .site-logo img {
+	width: auto;
+	height: 100%;
+	max-height: 100px;
+}
+
+header .topMenu.mobile .menu-content ul {
+	width: 100%
+}
+
+header .topMenu.mobile .menu-content ul a {
+	zoom: 160%;
+}

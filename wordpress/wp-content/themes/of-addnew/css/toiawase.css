@@ -1,0 +1,18 @@
+
+form.wpcf7-form *{
+    font-size: 18px;
+}
+form.wpcf7-form input{
+    width: 100%;
+}
+form.wpcf7-form input, 
+form.wpcf7-form textarea{
+    border: solid 2px gray;
+    border-radius: 2px;    
+    width: 100%;
+}
+form.wpcf7-form input[type="submit"]{
+    border-radius: 5px;
+    color: black !important;
+    background-color: lime !important;
+} 

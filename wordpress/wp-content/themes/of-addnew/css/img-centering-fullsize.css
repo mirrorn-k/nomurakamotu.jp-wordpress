@@ -1,0 +1,52 @@
+
+.img-centering-fullsize{
+    position: relative;
+    overflow: hidden;;
+}
+
+.img-centering-fullsize img{
+    position: absolute;
+}
+
+/* 左右のみをはみ出させる
+結果画像上部が表示される
+*/
+.img-centering-fullsize.LeftRight img{
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    -webkit-transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
+}
+/* 
+中央が表示される
+*/
+.img-centering-fullsize.central img{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+
+/* 左右のみをはみ出させる
+結果画像上部が表示される
+*/
+.img-centering-fullsize img.LeftRight{
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    -webkit-transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
+}
+/* 
+中央が表示される
+*/
+.img-centering-fullsize img.central{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}

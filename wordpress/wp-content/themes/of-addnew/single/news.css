@@ -1,0 +1,16 @@
+.single-news .imgs{
+    display: flex;
+    justify-content: left;
+    gap: var(--gap);
+    flex-flow: wrap;
+}
+.single-news .imgs .img{
+    width: calc(50% - var(--gap));
+    max-height: 250px;
+}
+
+.single-news .imgs .img img{
+    height: 100%;
+    object-fit: cover;
+}
+

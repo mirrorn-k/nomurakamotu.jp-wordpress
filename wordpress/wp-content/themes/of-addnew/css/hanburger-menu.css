@@ -1,0 +1,113 @@
+:root {
+    /*
+	--hanbugerMenu-height: var(--megamenu-height);
+	--hanbugerMenu-color: var(--main-color);
+	--hanbugerMenu-backcolor: var(--main-backcolor);
+    */
+
+}
+
+.hamburger-menu>.menu-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    height: var(--hanbugerMenu-height);
+    width: var(--hanbugerMenu-height);
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+}
+
+.hamburger-menu>.menu-btn span,
+.hamburger-menu>.menu-btn span:before,
+.hamburger-menu>.menu-btn span:after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 25px;
+    border-radius: 3px;
+    position: absolute;
+    background-color: var(--hanbugerMenu-color);
+}
+
+.hamburger-menu>.menu-btn span:before {
+    bottom: 8px;
+}
+
+.hamburger-menu>.menu-btn span:after {
+    top: 8px;
+}
+
+#topMenu-btn-check {
+    display: none;
+}
+
+/* checkedが付いたらハンバーガーを×にする */
+#topMenu-btn-check:checked~.menu-btn span {
+    background-color: rgba(255, 255, 255, 0);
+    /*メニューオープン時は真ん中の線を透明にする*/
+}
+
+#topMenu-btn-check:checked~.menu-btn span::before {
+    bottom: 0;
+    transform: rotate(45deg);
+}
+
+#topMenu-btn-check:checked~.menu-btn span::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+#topMenu-btn-check:checked~.menu-content {
+    right: 0;
+    /*メニューを画面内へ*/
+}
+
+/* ボタン押下で表示されるメニュー */
+.menu-content {
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    top: var(--hanbugerMenu-height);
+    right: -200px;
+    /*leftの値を変更してメニューを画面外へ*/
+    z-index: 80;
+    transition: all 0.5s;
+    /*アニメーション設定*/
+    background-color: var(--hanbugerMenu-backcolor);
+    box-shadow: 0 10px 8px grey;
+    padding: 5px;
+}
+
+.menu-content ul {
+    padding: 70px 10px 0;
+}
+
+.menu-content ul li {
+    border-bottom: solid 1px var(--hanbugerMenu-color);
+    list-style: none;
+}
+
+.menu-content ul li a {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    box-sizing: border-box;
+    text-decoration: none;
+    padding: 9px 15px 8px 0;
+    position: relative;
+    font-family: var(--fontFamily-tittle);
+}
+
+.menu-content ul li a::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-top: solid 2px var(--hanbugerMenu-backcolor);
+    border-right: solid 2px var(--hanbugerMenu-backcolor);
+    transform: rotate(45deg);
+    position: absolute;
+    right: 11px;
+    top: 16px;
+}

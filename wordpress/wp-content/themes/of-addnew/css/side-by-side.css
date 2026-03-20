@@ -1,0 +1,59 @@
+@charset "utf-8";
+
+/*******************************************
+横並び用
+*******************************************/
+.side-by-side{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    --side-by-side-width: auto;
+}
+.side-by-side.flexFlow-nowrap{
+    flex-flow: nowrap;
+}
+.side-by-side.flexDirection-rowReverse{
+    flex-direction:row-reverse;
+}
+
+.side-by-side.no-justify{
+    justify-content: left;
+}
+.side-by-side.justify-center{
+    justify-content: center;
+}
+.side-by-side.justify-space-evenly{
+    justify-content: space-evenly;
+}
+.side-by-side:after{
+    content:"";
+    display:block;
+    height:0;
+}
+
+.side-by-side.clm5{
+    --side-by-side-width: 19%;
+}
+.side-by-side.clm4{
+    --side-by-side-width: 24%;
+}
+.side-by-side.clm3{
+    --side-by-side-width: 32%;
+}
+.side-by-side.clm2{
+    --side-by-side-width: 48%;
+}
+.side-by-side > .clmItem{
+    width: var(--side-by-side-width);
+    float:left;
+}
+.side-by-side:after{
+    width: var(--side-by-side-width);
+}
+/* width: 100%;で残りスペースを埋める */
+.side-by-side > .clmItem.spacer {
+    width: 100% !important;
+}
+
+

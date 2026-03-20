@@ -1,0 +1,88 @@
+/* 対象のタグに共通でつけるスタイル */
+:root{
+	/*
+	--runningBottomLine-color:  var(--main-color);
+	--runningBottomLine-backcolor:  var(--main-backcolor);
+	*/
+}
+.running-bottomLine{
+	position: relative;
+	margin-bottom:0;
+}
+.running-bottomLine::after{
+	position: absolute;
+	left: 0;
+	content: '';
+	width: 100%;
+	transform: scale(0, 1);
+	transition: transform .3s;
+	background: linear-gradient(90deg, var(--runningBottomLine-color) 0, var(--runningBottomLine-color) 100px, rgb(0,0,0,0) 100px, rgb(0,0,0,0) 100%);
+}
+
+/* 左から走ってくる */
+.running-bottomLine.from-left:hover::after{
+	transform-origin: left top;
+	transform: scale(1, 1);
+}
+
+/* 右から走ってくる */
+.running-bottomLine.from-right:hover::after{
+	transform-origin: right top;
+	transform: scale(1, 1);
+}
+
+/* 左へ走っていく */
+.running-bottomLine.to-left::after{
+	transform-origin: left top;
+}
+
+/* 右から走ってくる */
+.running-bottomLine.to-right::after{
+	transform-origin: right top;
+}
+
+/**
+ *線の幅をクラス名で返れるように 
+ */
+/* 4px */
+.running-bottomLine.thickness-4{
+	border-bottom: 4px solid var(--runningBottomLine-backcolor);
+}
+.running-bottomLine.thickness-4::after{
+	bottom: -4px;
+	height: 4px;
+}
+
+/* 3px */
+.running-bottomLine.thickness-3{
+	border-bottom: 3px solid var(--runningBottomLine-backcolor);
+}
+.running-bottomLine.thickness-3::after{
+	bottom: -3px;
+	height: 3px;
+}
+
+/* 2px */
+.running-bottomLine.thickness-2{
+	border-bottom: 2px solid var(--runningBottomLine-backcolor);
+}
+.running-bottomLine.thickness-2::after{
+	bottom: -2px;
+	height: 2px;
+}
+
+/* 1px */
+.running-bottomLine.thickness-1{
+	border-bottom: 1px solid var(--runningBottomLine-backcolor);
+}
+.running-bottomLine.thickness-1::after{
+	bottom: -1px;
+	height: 1px;
+}
+
+@media screen and (max-width: 1024px){
+
+	.running-bottomLine::after{
+		transform: scale(1, 1);
+	}
+}
