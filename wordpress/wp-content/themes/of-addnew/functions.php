@@ -2,10 +2,6 @@
 remove_filter('the_content', 'wpautop'); // 記事の自動整形を無効にする
 remove_filter('the_excerpt', 'wpautop'); // 抜粋の自動整形を無効にする
 
-// 自動バックグラウンド更新を無効にする
-define('AUTOMATIC_UPDATER_DISABLED', true);
-
-
 if(array_key_exists("mode", $_GET)){
 	if($_GET["mode"] == "debug"){
 		ini_set("display_errors", 1);
@@ -104,6 +100,14 @@ function Get_aryidx0($ary, $flg_code = true){
     }
     return $res;
 }
+
+/**
+ * jQueryのブロック解除（最重要）
+ */
+add_filter('script_loader_tag', function($tag, $handle, $src) {
+    if (is_admin()) return $tag;
+    return '<script src="' . $src . '" defer></script>';
+}, 10, 3);
 
 include_once(get_stylesheet_directory() . "/functions/add_enqueue.php"); // CSS・script追加設定
 include_once(get_stylesheet_directory() . "/functions/customizer.php");  // 外観カスタマイズ設定

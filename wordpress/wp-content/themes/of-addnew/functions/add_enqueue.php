@@ -16,11 +16,19 @@ function theme_enqueue_styles() {
 	wp_enqueue_style('style', get_template_directory_uri() . '/style.css' . $param  , array(), wp_get_theme()->get( 'Version' ));
 	
 	// 共通
+	/*
     $dir_inputFile = glob(get_template_directory() . "/css/*.css");
 	foreach ($dir_inputFile as $key => $value) {
 		$value = str_replace( get_template_directory() . "/css", "", $value);
 		wp_enqueue_style( $value . '-style', get_template_directory_uri() . '/css' . $value . $param  , array(), wp_get_theme()->get( 'Version' ));
 	}
+	*/
+	wp_enqueue_style(
+		'css-style',
+		get_template_directory_uri() . '/css/app.css' . $param,
+		array(),
+		filemtime(get_template_directory() . '/css/app.css')
+		);
 	
 	// slickスライダー
 	$dir_inputFile = glob(get_template_directory() . "/slick/*.css");
