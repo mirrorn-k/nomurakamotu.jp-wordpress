@@ -101,13 +101,17 @@ function Get_aryidx0($ary, $flg_code = true){
     return $res;
 }
 
-/**
- * jQueryのブロック解除（最重要）
- */
 add_filter('script_loader_tag', function($tag, $handle, $src) {
     if (is_admin()) return $tag;
+
+    // すでにdefer/asyncがある場合はスキップ
+    if (strpos($tag, 'defer') !== false || strpos($tag, 'async') !== false) {
+        return $tag;
+    }
+
     return '<script src="' . $src . '" defer></script>';
 }, 10, 3);
+
 
 include_once(get_stylesheet_directory() . "/functions/add_enqueue.php"); // CSS・script追加設定
 include_once(get_stylesheet_directory() . "/functions/customizer.php");  // 外観カスタマイズ設定
@@ -210,6 +214,7 @@ add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles_child' );
 function Get_posts_types(){
 	return array('post', 'page', 'news');
 }
+
 function Get_posts_types_custom(){
 
 	$post_type = Get_posts_types();
