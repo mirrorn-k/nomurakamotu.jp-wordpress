@@ -62,9 +62,11 @@
 
 <body <?php body_class(); ?>>
 
+<!--
 <div id="loading">
 	<div id="splash_text"></div>
-</div><!--/loading-->
+</div>--><!--/loading-->
+
 
 <div id="mega-menu" class="site-top side-by-side no-justify color-set01">
 	<?php get_template_part( 'header/site-branding' ); ?>

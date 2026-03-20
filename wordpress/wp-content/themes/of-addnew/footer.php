@@ -75,7 +75,7 @@ foreach ($dir_inputFile as $key => $value) {
 	<script src="<?php echo get_stylesheet_directory_uri();?>/js/jquery-migrate-1.4.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri();?>/js/slick/slick.css"/>
 	<script type="text/javascript" src="<?php echo get_stylesheet_directory_uri();?>/js/slick/slick.min.js"></script>
-	<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/progressbar.js-master/dist/progressbar.min.js"></script>
+	<!-- <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/progressbar.js-master/dist/progressbar.min.js"></script> -->
 <?php wp_footer(); ?>
 
 </body>
