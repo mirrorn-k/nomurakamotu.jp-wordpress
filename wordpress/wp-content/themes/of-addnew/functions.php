@@ -23,8 +23,10 @@ function get_param(){
 
 
 // URLをリセット
+/*
 global $wp_rewrite;
 $wp_rewrite->flush_rules();
+*/
 
 if ( ! function_exists( 'OldFashioned_setup' ) ) {
 	function OldFashioned_setup() {
@@ -301,9 +303,13 @@ add_filter('nav_menu_link_attributes', 'add_additional_class_on_a', 1, 3);
 // セッション
 function my_session_start()
 {
-	if (session_status() !== PHP_SESSION_ACTIVE) {
-		session_start();
-	}
+    if (is_admin()) return;
+
+    if (is_page('contact')) { // 必要なページだけ
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+    }
 	$_SESSION['foo'] = 'var';
 }
 add_action('init', 'my_session_start');
