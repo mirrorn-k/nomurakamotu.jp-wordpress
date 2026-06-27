@@ -1,4 +1,7 @@
-.PHONY: up import start
+.PHONY: up import start backup
+
+BACKUP_DIR ?= backups
+BACKUP_FILE ?= $(BACKUP_DIR)/nomurakamotsu-db-$(shell date +%Y%m%d-%H%M%S).sql
 
 build-no-cache:
 	docker compose build --no-cache
@@ -32,4 +35,7 @@ prod-down:
 	docker compose down
 
 backup:
-	docker exec nomurakamotsu-mysql mysqldump -uroot -p'rootpassword' wordpress > $(FILE)
+	mkdir -p "$(BACKUP_DIR)"
+	docker compose exec -T db sh -c 'mysqldump --single-transaction --quick --default-character-set=utf8mb4 -u"$$MYSQL_USER" -p"$$MYSQL_PASSWORD" "$$MYSQL_DATABASE"' > "$(BACKUP_FILE)"
+	gzip -f "$(BACKUP_FILE)"
+	@echo "Backup saved: $(BACKUP_FILE).gz"
